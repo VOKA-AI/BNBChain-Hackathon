@@ -1,0 +1,20 @@
+.upload_model_container {
+    display: flex;
+}
+
+.file-cta {
+    height: 3rem;
+    font-size: 1rem;
+}
+
+.file-upload {
+    padding-right: 20px;
+}
+
+.file-upload .button {
+    height: 3rem;
+}
+
+.join .button {
+    height: 3rem;
+}
