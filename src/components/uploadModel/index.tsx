@@ -4,9 +4,11 @@ import { useAccount } from 'wagmi';
 import { client, selectSp } from '../../client';
 import { ObjectMeta } from '@bnb-chain/greenfield-js-sdk/dist/esm/types/sp/Common';
 import { getOffchainAuthKeys } from '../../utils/offchainAuth';
+import { message } from 'antd';
 import './index.css';
 
 export const UploadModel = () => {
+    const [messageApi, contextHolder] = message.useMessage();
     const { address, connector } = useAccount();
     const [info, setInfo] = useState<{
         bucketName: string;
@@ -22,16 +24,14 @@ export const UploadModel = () => {
         if (!address) return;
 
         const spInfo = await selectSp();
-        console.log('spInfo', spInfo);
 
         const provider = await connector?.getProvider();
         const offChainData = await getOffchainAuthKeys(address, provider);
         if (!offChainData) {
-            alert('No offchain, please create offchain pairs first');
+            messageApi.error('No offchain, please create offchain pairs first');
             return;
         }
 
-        console.log(address.toLowerCase())
         try {
             const createBucketTx = await client.bucket.createBucket(
                 {
@@ -56,8 +56,6 @@ export const UploadModel = () => {
                 denom: 'BNB',
             });
 
-            console.log('simulateInfo', simulateInfo);
-
             const res = await createBucketTx.broadcast({
                 denom: 'BNB',
                 gasLimit: Number(simulateInfo?.gasLimit),
@@ -67,15 +65,15 @@ export const UploadModel = () => {
             });
 
             if (res.code === 0) {
-                alert('success');
+                messageApi.success("join succeed!")
+                window.location.reload()
             }
         } catch (err) {
-            console.log(typeof err)
             if (err instanceof Error) {
-                alert(err.message);
+                messageApi.error(err.message)
             }
             if (err && typeof err === 'object') {
-                alert(JSON.stringify(err))
+                messageApi.error(JSON.stringify(err))
             }
         }
 
@@ -90,7 +88,7 @@ export const UploadModel = () => {
         const provider = await connector?.getProvider();
         const offChainData = await getOffchainAuthKeys(address, provider);
         if (!offChainData) {
-            alert('No offchain, please create offchain pairs first');
+            messageApi.error('No offchain, please create offchain pairs first');
             return;
         }
 
@@ -153,16 +151,17 @@ export const UploadModel = () => {
                 );
 
                 if (uploadRes.code === 0) {
-                    alert('success');
+                    messageApi.success('upload model success!');
+                    window.location.reload()
                 }
             }
         } catch (err) {
             console.log(typeof err)
             if (err instanceof Error) {
-                alert(err.message);
+                messageApi.error(err.message)
             }
             if (err && typeof err === 'object') {
-                alert(JSON.stringify(err))
+                messageApi.error(JSON.stringify(err))
             }
         }
 
@@ -170,8 +169,7 @@ export const UploadModel = () => {
 
     return (
         <div className='upload_model_container'>
-
-
+            {contextHolder}
             <label className="file-label">
                 <input className="file-input" type="file" name="resume" onChange={(e) => {
 
@@ -184,7 +182,7 @@ export const UploadModel = () => {
                 }} />
                 <span className="file-cta">
                     <span className='file-label'>
-                    {info.file ? info.file.name : "选择模型"}
+                        {info.file ? info.file.name : "选择模型"}
                     </span>
                 </span>
             </label>
