@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.file-input {
+    background-color: red;
+}
+
 .file-cta {
     height: 3rem;
     font-size: 1rem;

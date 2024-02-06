@@ -172,8 +172,9 @@ export const UploadModel = () => {
         <div className='upload_model_container'>
 
 
-            <label className="file-select">
+            <label className="file-label">
                 <input className="file-input" type="file" name="resume" onChange={(e) => {
+
                     if (e.target.files) {
                         setInfo({
                             ...info,
@@ -182,7 +183,9 @@ export const UploadModel = () => {
                     }
                 }} />
                 <span className="file-cta">
+                    <span className='file-label'>
                     {info.file ? info.file.name : "选择模型"}
+                    </span>
                 </span>
             </label>
 

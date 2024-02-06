@@ -16,7 +16,6 @@ function App() {
       </header>
       <div>
         {isConnected && <ModelList /> }
-
       </div>
     </div>
   );
