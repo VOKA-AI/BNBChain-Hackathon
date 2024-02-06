@@ -42,8 +42,27 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## 项目描述
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+项目思路是以用户的address创建bucket，如果第一次使用，需要点击`Join`按钮完成加入（也就是创建bucket）
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bucket中保存`glb`模型文件，网站支持上传和删除。
+
+另外结合threejs完成了模型的预览。实现3D模型预览的具体方式是利用API中的[getObjectPreviewUrl](https://docs.bnbchain.org/greenfield-js-sdk/api/object/#getobjectpreviewurl-)接口，获取url，然后利用`useGLTF(url)`获取model。
+
+> ps: 直接用useGLTF获取scene的话，模型需要满足特定结构，否则会报错，参考：https://stackoverflow.com/a/52710540
+
+## 相关文档
+
+### Greenfield
+
+- https://testnet.greenfieldscan.com/
+- https://docs.bnbchain.org/greenfield-docs/docs/guide/home
+- https://docs.bnbchain.org/greenfield-js-sdk/
+- https://github.com/bnb-chain/greenfield-js-sdk
+- https://testnet.dcellar.io/
+
+- https://dorahacks.io/hackathon/bnbchain-hackathon/detail
+### Threejs
+- https://threejs.org/
+- https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
