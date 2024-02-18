@@ -24,3 +24,14 @@ Users can use these 3D models as face mask during live broadcasts in our **Live 
 - https://threejs.org/
 - https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
 
+# Usage
+
+## Runs app in the development mode
+
+`npm start` and open http://localhost:3000
+
+## Builds the app for production
+
+`npm run build`, build to the `build` folder, and ready to deploy
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
